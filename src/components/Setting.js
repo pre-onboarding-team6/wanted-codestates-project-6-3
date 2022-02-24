@@ -1,9 +1,10 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Button from './Button';
 import Dropdown from './Dropdown';
 import Cog from './icons/Cog';
 import Input from './Input';
 import ListItem from './ListItem';
+import Radio from './Radio';
 import StackedList from './StackedList';
 import Toggle from './Toggle';
 
@@ -12,6 +13,12 @@ export default function Setting() {
   const [enabledSearch, setEnabledSearch] = useState();
   const [enabledMove, setEnabledMove] = useState();
   const [enabledUnit, setEnabledUnit] = useState();
+
+  const sizeType = ['xs', 's', 'm'];
+  const [size, setSize] = useState('xs');
+  useEffect(() => {
+    console.log('size 변경 => ', size);
+  }, [size]);
 
   return (
     <div className="p-6">
@@ -75,11 +82,21 @@ export default function Setting() {
             </div>
           </ListItem>
           <ListItem>
-            <div className="p-3 flex items-center space-x-2">
+            <div className="p-3 flex items-center justify-between">
               <span className="text-lg">아이템 크기</span>
-              <span>xs</span>
-              <span>s</span>
-              <span>m</span>
+              <div className="flex items-center space-x-4">
+                {sizeType.map((type, index) => (
+                  <Radio
+                    key={index}
+                    name="size"
+                    value={size}
+                    label={type}
+                    onChange={() => {
+                      setSize(type);
+                    }}
+                  />
+                ))}
+              </div>
             </div>
           </ListItem>
           <ListItem>

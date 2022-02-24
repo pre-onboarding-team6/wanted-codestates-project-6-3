@@ -1,4 +1,14 @@
+import { useEffect } from 'react';
+
 export default function Toggle({ enabled, setEnabled, onEnabled, onDisabled }) {
+  useEffect(() => {
+    if (enabled && onEnabled) {
+      onEnabled();
+    } else if (!enabled && onDisabled) {
+      onDisabled();
+    }
+  }, [enabled]);
+
   return (
     <label className="flex items-center h-5">
       <input

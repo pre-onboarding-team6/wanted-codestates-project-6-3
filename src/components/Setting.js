@@ -27,7 +27,16 @@ export default function Setting() {
             <div className="p-3 flex justify-between items-center">
               <span className="text-lg">타이틀</span>
               <span>
-                <Toggle enabled={enabledTitle} setEnabled={setEnabledTitle} />
+                <Toggle
+                  enabled={enabledTitle}
+                  setEnabled={setEnabledTitle}
+                  onEnabled={() => {
+                    console.log('title 수정가능');
+                  }}
+                  onDisabled={() => {
+                    console.log('title 수정불가');
+                  }}
+                />
               </span>
             </div>
           </ListItem>

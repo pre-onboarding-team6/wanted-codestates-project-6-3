@@ -1,12 +1,9 @@
-import Input from "./Input";
-import ListItem from "./ListItem";
-import StackedList from "./StackedList";
-import Title from "./Title";
-import { emojiMenus } from "../constances";
+import Input from "./Input"
+import ListItem from "./ListItem"
+import StackedList from "./StackedList"
+import Title from "./Title"
 
-export default function Selector() {
-  const items = emojiMenus;
-
+export default function Selector({ list }) {
   return (
     <div
       style={{
@@ -16,14 +13,14 @@ export default function Selector() {
       className="flex flex-col space-y-2"
     >
       <Input placeholder={"search"} />
-      <div className="bg-white shadow overflow-hidden sm:rounded-md flex flex-col">
+      <div className="flex flex-col overflow-hidden bg-white shadow sm:rounded-md">
         <Title>
           <div className="p-3">
             <span className="text-xl">Title</span>
           </div>
         </Title>
         <StackedList>
-          {items.map((item, index) => {
+          {list?.map((item, index) => {
             return (
               <ListItem key={index}>
                 <div className="p-3 cursor-pointer">
@@ -31,13 +28,13 @@ export default function Selector() {
                   <span>{item.name}</span>
                 </div>
               </ListItem>
-            );
+            )
           })}
         </StackedList>
-        <div className="border-t flex justify-center p-2">
+        <div className="flex justify-center p-2 border-t">
           <span>0/4</span>
         </div>
       </div>
     </div>
-  );
+  )
 }

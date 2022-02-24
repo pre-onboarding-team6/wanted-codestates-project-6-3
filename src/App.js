@@ -1,29 +1,38 @@
 import Button from './components/Button';
 import ChevronDoubleLeft from './components/icons/ChevronDoubleLeft';
 import ChevronDoubleRight from './components/icons/ChevronDoubleRight';
+import ChevronLeft from './components/icons/ChevronLeft';
+import ChevronRight from './components/icons/ChevronRight';
 import Refresh from './components/icons/Refresh';
 import Selector from './components/Selector';
-import Setting from './components/Setting';
+import { emojiMenus } from './constances';
 
 function App() {
+  const items = emojiMenus;
+
+  // 처리
+
   return (
-    <div>
-      <div className="p-6 flex items-center space-x-3">
-        <Selector />
-        <div className="flex flex-col">
-          <Button>
-            <Refresh />
-          </Button>
-          <Button>
-            <ChevronDoubleLeft />
-          </Button>
-          <Button>
-            <ChevronDoubleRight />
-          </Button>
-        </div>
-        <Selector />
-        <Setting />
+    <div className="flex items-center p-6 space-x-3">
+      <Selector list={items} />
+      <div className="flex flex-col">
+        <Button>
+          <Refresh />
+        </Button>
+        <Button>
+          <ChevronDoubleLeft />
+        </Button>
+        <Button>
+          <ChevronDoubleRight />
+        </Button>
+        <Button>
+          <ChevronLeft />
+        </Button>
+        <Button onClick={() => {}}>
+          <ChevronRight />
+        </Button>
       </div>
+      <Selector list={[]} />
     </div>
   );
 }

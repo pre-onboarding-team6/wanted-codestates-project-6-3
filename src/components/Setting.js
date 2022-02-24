@@ -24,7 +24,7 @@ export default function Setting() {
       >
         <StackedList>
           <ListItem>
-            <div className="p-3 flex justify-between items-center">
+            <div className="flex items-center justify-between p-3">
               <span className="text-lg">타이틀</span>
               <span>
                 <Toggle
@@ -51,7 +51,7 @@ export default function Setting() {
             </div>
           </ListItem>
           <ListItem>
-            <div className="p-3 flex justify-between items-center">
+            <div className="flex items-center justify-between p-3">
               <span className="text-lg">검색</span>
               <span>
                 <Toggle enabled={enabledSearch} setEnabled={setEnabledSearch} />
@@ -59,7 +59,7 @@ export default function Setting() {
             </div>
           </ListItem>
           <ListItem>
-            <div className="p-3 flex justify-between items-center">
+            <div className="flex items-center justify-between p-3">
               <span className="text-lg">하나씩만 옮기기</span>
               <span>
                 <Toggle enabled={enabledMove} setEnabled={setEnabledMove} />
@@ -67,7 +67,7 @@ export default function Setting() {
             </div>
           </ListItem>
           <ListItem>
-            <div className="p-3 flex justify-between items-center">
+            <div className="flex items-center justify-between p-3">
               <span className="text-lg">선택된 아이템 갯수 표시</span>
               <span>
                 <Toggle enabled={enabledUnit} setEnabled={setEnabledUnit} />
@@ -75,7 +75,7 @@ export default function Setting() {
             </div>
           </ListItem>
           <ListItem>
-            <div className="p-3 flex items-center space-x-2">
+            <div className="flex items-center p-3 space-x-2">
               <span className="text-lg">아이템 크기</span>
               <span>xs</span>
               <span>s</span>

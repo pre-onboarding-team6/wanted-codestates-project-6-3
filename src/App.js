@@ -22,33 +22,39 @@ function App() {
   const [rightItems, setRightItems] = useState([]);
   const [selectedItems, setSelectedItems] = useState(initialSeleted);
 
-  const { handleLeftSelect, handleRightSelect, moveToRight, moveToLeft } =
-    MoveItems({
-      initialSeleted,
-      leftItems,
-      rightItems,
-      setLeftItems,
-      setRightItems,
-      selectedItems,
-      setSelectedItems,
-    });
+  const {
+    handleLeftSelect,
+    handleRightSelect,
+    moveToRight,
+    moveToLeft,
+    resetMove,
+  } = MoveItems({
+    items,
+    initialSeleted,
+    leftItems,
+    rightItems,
+    setLeftItems,
+    setRightItems,
+    selectedItems,
+    setSelectedItems,
+  });
 
   return (
-    <div className="flex items-center p-6 space-x-3">
+    <div className="flex p-6 space-x-3">
       <Selector
         list={leftItems}
         selectedItems={selectedItems.left}
         handleSelect={handleLeftSelect}
       />
-      <div className="flex flex-col">
+      <div className="flex flex-col self-center">
         <Button>
-          <Refresh />
+          <Refresh onClick={resetMove} />
         </Button>
         <Button>
-          <ChevronDoubleLeft />
+          <ChevronDoubleLeft onClick={() => moveToLeft({ all: true })} />
         </Button>
         <Button>
-          <ChevronDoubleRight />
+          <ChevronDoubleRight onClick={() => moveToRight({ all: true })} />
         </Button>
         <Button onClick={moveToLeft}>
           <ChevronLeft />

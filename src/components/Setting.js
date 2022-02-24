@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
 import Button from './Button';
-import Dropdown from './Dropdown';
 import Cog from './icons/Cog';
 import Input from './Input';
 import ListItem from './ListItem';
+import Popover from './Popover';
 import Radio from './Radio';
 import StackedList from './StackedList';
 import Toggle from './Toggle';
@@ -22,7 +22,7 @@ export default function Setting() {
 
   return (
     <div>
-      <Dropdown
+      <Popover
         button={
           <Button>
             <Cog />
@@ -48,9 +48,14 @@ export default function Setting() {
             </div>
           </ListItem>
           <ListItem>
-            <div className="p-3">
+            <div className="p-3 flex flex-col space-y-1">
               <div>
-                <Input placeholder={'avaliable options'} />
+                <Input
+                  placeholder={'avaliable options'}
+                  onKeyDown={() => {
+                    console.log('sub');
+                  }}
+                />
               </div>
               <div>
                 <Input placeholder={'selected options'} />
@@ -100,7 +105,7 @@ export default function Setting() {
             </div>
           </ListItem>
           <ListItem>
-            <div className="p-3">
+            <div className="p-3 flex flex-col space-y-1">
               <div>
                 <Input placeholder={`가로 (현재: 171px)`} />
               </div>
@@ -110,7 +115,7 @@ export default function Setting() {
             </div>
           </ListItem>
         </StackedList>
-      </Dropdown>
+      </Popover>
     </div>
   );
 }

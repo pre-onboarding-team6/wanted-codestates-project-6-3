@@ -5,16 +5,17 @@ import ChevronLeft from './components/icons/ChevronLeft';
 import ChevronRight from './components/icons/ChevronRight';
 import Refresh from './components/icons/Refresh';
 import Selector from './components/Selector';
+import useMoveItems from './hooks/useMoveItems';
 import { emojiMenus } from './constances';
 
 function App() {
   const items = emojiMenus;
-
-  // 처리
+  const { leftItems, rightItems, moveToLeft, moveToRight, handleSelect } =
+    useMoveItems(items);
 
   return (
     <div className="flex items-center p-6 space-x-3">
-      <Selector list={items} />
+      <Selector list={leftItems} handleSelect={handleSelect} />
       <div className="flex flex-col">
         <Button>
           <Refresh />
@@ -25,14 +26,14 @@ function App() {
         <Button>
           <ChevronDoubleRight />
         </Button>
-        <Button>
+        <Button onClick={moveToLeft}>
           <ChevronLeft />
         </Button>
-        <Button onClick={() => {}}>
+        <Button onClick={moveToRight}>
           <ChevronRight />
         </Button>
       </div>
-      <Selector list={[]} />
+      <Selector list={rightItems} handleSelect={handleSelect} />
     </div>
   );
 }

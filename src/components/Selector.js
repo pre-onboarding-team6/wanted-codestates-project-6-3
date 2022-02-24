@@ -1,18 +1,18 @@
-import Input from "./Input"
-import ListItem from "./ListItem"
-import StackedList from "./StackedList"
-import Title from "./Title"
+import Input from './Input';
+import ListItem from './ListItem';
+import StackedList from './StackedList';
+import Title from './Title';
 
-export default function Selector({ list }) {
+export default function Selector({ list, handleSelect }) {
   return (
     <div
       style={{
-        width: "300px",
-        height: "400px",
+        width: '300px',
+        height: '400px',
       }}
       className="flex flex-col space-y-2"
     >
-      <Input placeholder={"search"} />
+      <Input placeholder={'search'} />
       <div className="flex flex-col overflow-hidden bg-white shadow sm:rounded-md">
         <Title>
           <div className="p-3">
@@ -20,15 +20,19 @@ export default function Selector({ list }) {
           </div>
         </Title>
         <StackedList>
-          {list?.map((item, index) => {
+          {list?.map((item) => {
             return (
-              <ListItem key={index}>
+              <ListItem
+                key={item.id}
+                id={item.id}
+                handleSelect={() => handleSelect(item.id)}
+              >
                 <div className="p-3 cursor-pointer">
                   <span>{item.emoji}</span>
                   <span>{item.name}</span>
                 </div>
               </ListItem>
-            )
+            );
           })}
         </StackedList>
         <div className="flex justify-center p-2 border-t">
@@ -36,5 +40,5 @@ export default function Selector({ list }) {
         </div>
       </div>
     </div>
-  )
+  );
 }

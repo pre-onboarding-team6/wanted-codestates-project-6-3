@@ -5,15 +5,15 @@ import Title from './Title';
 
 export default function Selector({ list, handleSelect }) {
   return (
-    <div
-      style={{
-        width: '300px',
-        height: '400px',
-      }}
-      className="flex flex-col space-y-2"
-    >
+    <div className="flex flex-col space-y-2">
       <Input placeholder={'search'} />
-      <div className="flex flex-col overflow-hidden bg-white shadow sm:rounded-md">
+      <div
+        className="flex flex-col overflow-hidden bg-white shadow sm:rounded-md"
+        style={{
+          width: '300px',
+          height: '400px',
+        }}
+      >
         <Title>
           <div className="p-3">
             <span className="text-xl">Title</span>

@@ -38,10 +38,11 @@ const useMoveItems = (items) => {
 
   const handleSelect = (id) => {
     // 클릭된 아이템 배열에 담기
-    setSelectedItems((prev) => [
-      ...prev,
-      ...items.filter((item) => item.id === id),
-    ]);
+    setSelectedItems((prev) =>
+      !prev.map(({ id }) => id).includes(id) // 원래 있던 것은 추가하지 않음
+        ? [...prev, ...items.filter((item) => item.id === id)]
+        : prev,
+    );
   };
 
   return {

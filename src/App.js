@@ -6,6 +6,7 @@ import ChevronRight from './components/icons/ChevronRight';
 import Refresh from './components/icons/Refresh';
 import Selector from './components/Selector';
 import useMoveItems from './hooks/useMoveItems';
+import Setting from './components/Setting';
 import { emojiMenus } from './constances';
 
 function App() {
@@ -34,6 +35,7 @@ function App() {
         </Button>
       </div>
       <Selector list={rightItems} handleSelect={handleSelect} />
+      <Setting />
     </div>
   );
 }

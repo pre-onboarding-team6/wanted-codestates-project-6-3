@@ -1,22 +1,10 @@
-import { useState } from 'react';
-
-export default function ListItem({ children, handleSelect }) {
-  const [clicked, setClicked] = useState(false);
-
-  const handleClick = () => {
-    handleSelect();
-    setClicked((prev) => !prev);
-  };
-
+export default function ListItem({
+  className = 'block hover:bg-gray-50',
+  children,
+  ...rest
+}) {
   return (
-    <div
-      className={`block hover:${
-        clicked //
-          ? 'bg-gray-400'
-          : 'bg-gray-50'
-      } ${clicked ? 'bg-gray-300' : ''}`}
-      onClick={handleClick}
-    >
+    <div className={className} {...rest}>
       {children}
     </div>
   );

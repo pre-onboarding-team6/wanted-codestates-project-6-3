@@ -1,9 +1,17 @@
+import { useState } from 'react';
 import Input from './Input';
 import ListItem from './ListItem';
 import StackedList from './StackedList';
 import Title from './Title';
 
 export default function Selector({ list, handleSelect }) {
+  const [clickedId, setClickedId] = useState(null);
+
+  const handleClick = (id) => {
+    setClickedId((prev) => (prev === id ? null : id));
+    handleSelect(id);
+  };
+
   return (
     <div className="flex flex-col space-y-2">
       <Input placeholder={'search'} />
@@ -25,7 +33,12 @@ export default function Selector({ list, handleSelect }) {
               <ListItem
                 key={item.id}
                 id={item.id}
-                handleSelect={() => handleSelect(item.id)}
+                onClick={() => handleClick(item.id)}
+                className={`block hover:${
+                  clickedId === item.id //
+                    ? 'bg-gray-400'
+                    : 'bg-gray-50'
+                } ${clickedId === item.id ? 'bg-gray-300' : ''}`}
               >
                 <div className="p-3 cursor-pointer">
                   <span>{item.emoji}</span>

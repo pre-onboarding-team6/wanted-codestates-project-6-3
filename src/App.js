@@ -8,9 +8,9 @@ import Setting from './components/Setting';
 function App() {
   return (
     <div>
-      <div className="p-6 flex items-center space-x-3">
+      <div className="p-6 flex space-x-6">
         <Selector />
-        <div className="flex flex-col">
+        <div className="flex flex-col self-center">
           <Button>
             <Refresh />
           </Button>

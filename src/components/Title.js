@@ -1,3 +1,7 @@
-export default function Title({ children }) {
-  return <div className="block border-b">{children}</div>;
+export default function Title({
+  className = 'block border-b',
+  children,
+  ...rest
+}) {
+  return <div {...rest}>{children}</div>;
 }

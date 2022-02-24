@@ -18,7 +18,7 @@ const sizeList = [
 export default function Setting({
   changeListSize,
   changeTitle,
-  setSearch,
+  setSearchDisabled,
   setItemSize,
   setShowSelected,
 }) {
@@ -83,9 +83,10 @@ export default function Setting({
             <div className="flex flex-col p-3 space-y-1">
               <div>
                 <Input
-                  value={leftTitle}
+                  // value={leftTitle}
+                  defaultValue={leftTitle}
                   placeholder={`${leftTitle}`}
-                  onChange={(e) => setLeftTitle(e.target.value)}
+                  // onChange={(e) => setLeftTitle(e.target.value)}
                   onKeyUp={(e) =>
                     e.keyCode === 13 && changeTitle(e.target.value, 'avail')
                   }
@@ -113,10 +114,10 @@ export default function Setting({
                   enabled={enabledSearch}
                   setEnabled={setEnabledSearch}
                   onEnabled={() => {
-                    setSearch(false);
+                    setSearchDisabled(false);
                   }}
                   onDisabled={() => {
-                    setSearch(true);
+                    setSearchDisabled(true);
                   }}
                 />
               </span>

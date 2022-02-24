@@ -7,8 +7,6 @@ import Refresh from './components/icons/Refresh';
 import Selector from './components/Selector';
 import Setting from './components/Setting';
 
-import { emojiMenus } from './constances';
-
 function App() {
   const [leftTitle, setLeftTitle] = useState('available options');
   const [rightTitle, setRightTitle] = useState('selected options');
@@ -17,10 +15,7 @@ function App() {
   const [itemSize, setItemSize] = useState(15);
   const [listHeight, setListHeight] = useState(400);
   const [listWidth, setListWidth] = useState(300);
-  const [search, setSearch] = useState(false);
-
-  const [availableList, setAvailableList] = useState(emojiMenus);
-  const [selectedList, setSelectedList] = useState(emojiMenus);
+  const [searchDisabled, setSearchDisabled] = useState(false);
 
   const onChangeListSize = (data, type) => {
     if (type === 'width') {
@@ -42,11 +37,10 @@ function App() {
     <div>
       <div className="flex p-6 space-x-6">
         <Selector
-          items={availableList}
           listWidth={listWidth}
           listHeight={listHeight}
           leftTitle={leftTitle}
-          search={search}
+          searchDisabled={searchDisabled}
           itemSize={itemSize}
           showSelected={showSelected}
         />
@@ -62,18 +56,17 @@ function App() {
           </Button>
         </div>
         <Selector
-          items={selectedList}
           listHeight={listHeight}
           listWidth={listWidth}
           rightTitle={rightTitle}
-          search={search}
+          searchDisabled={searchDisabled}
           itemSize={itemSize}
           showSelected={showSelected}
         />
         <Setting
           changeListSize={onChangeListSize}
           changeTitle={onChangeTitle}
-          setSearch={setSearch}
+          setSearchDisabled={setSearchDisabled}
           setItemSize={setItemSize}
           setShowSelected={setShowSelected}
         />

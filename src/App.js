@@ -8,7 +8,7 @@ import Selector from './components/Selector';
 import Setting from './components/Setting';
 import { emojiMenus } from './constances';
 import { useState } from 'react';
-import MoveItems from './utils/MoveItems';
+import moveItems from './utils/moveItems';
 
 const items = emojiMenus;
 
@@ -28,7 +28,7 @@ function App() {
     moveToRight,
     moveToLeft,
     resetMove,
-  } = MoveItems({
+  } = moveItems({
     items,
     initialSeleted,
     leftItems,

@@ -1,4 +1,4 @@
-const MoveItems = ({
+const moveItems = ({
   items,
   initialSeleted,
   setLeftItems,
@@ -138,4 +138,4 @@ const MoveItems = ({
   };
 };
 
-export default MoveItems;
+export default moveItems;

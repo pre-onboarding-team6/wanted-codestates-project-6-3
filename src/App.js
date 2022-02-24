@@ -5,18 +5,31 @@ import ChevronLeft from './components/icons/ChevronLeft';
 import ChevronRight from './components/icons/ChevronRight';
 import Refresh from './components/icons/Refresh';
 import Selector from './components/Selector';
-import useMoveItems from './hooks/useMoveItems';
 import Setting from './components/Setting';
 import { emojiMenus } from './constances';
+import { useState } from 'react';
+
+const items = emojiMenus;
+
+const initialSeleted = {
+  left: [],
+  right: [],
+};
 
 function App() {
-  const items = emojiMenus;
-  const { leftItems, rightItems, moveToLeft, moveToRight, handleSelect } =
-    useMoveItems(items);
+  const [leftItems, setLeftItems] = useState(items);
+  const [rightItems, setRightItems] = useState([]);
+  const [selectedItems, setSelectedItems] = useState(initialSeleted);
 
   return (
     <div className="flex items-center p-6 space-x-3">
-      <Selector list={leftItems} handleSelect={handleSelect} />
+      <Selector
+        list={leftItems}
+        setLeftItems={setLeftItems}
+        setRightItems={setRightItems}
+        selectedItems={selectedItems}
+        handleSelect={setSelectedItems}
+      />
       <div className="flex flex-col">
         <Button>
           <Refresh />
@@ -27,14 +40,20 @@ function App() {
         <Button>
           <ChevronDoubleRight />
         </Button>
-        <Button onClick={moveToLeft}>
+        <Button onClick={() => {}}>
           <ChevronLeft />
         </Button>
-        <Button onClick={moveToRight}>
+        <Button onClick={() => {}}>
           <ChevronRight />
         </Button>
       </div>
-      <Selector list={rightItems} handleSelect={handleSelect} />
+      <Selector
+        list={rightItems}
+        setLeftItems={setLeftItems}
+        setRightItems={setRightItems}
+        selectedItems={selectedItems}
+        handleSelect={setSelectedItems}
+      />
       <Setting />
     </div>
   );

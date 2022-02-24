@@ -4,12 +4,16 @@ import ListItem from './ListItem';
 import StackedList from './StackedList';
 import Title from './Title';
 
-export default function Selector({ list, handleSelect }) {
-  const [clickedId, setClickedId] = useState(null);
-
+export default function Selector({
+  list,
+  setLeftItems,
+  setRightItems,
+  selectedItems,
+  handleSelect,
+}) {
   const handleClick = (id) => {
-    setClickedId((prev) => (prev === id ? null : id));
-    handleSelect(id);
+    console.log(id);
+    selectedItems(id);
   };
 
   return (
@@ -34,11 +38,6 @@ export default function Selector({ list, handleSelect }) {
                 key={item.id}
                 id={item.id}
                 onClick={() => handleClick(item.id)}
-                className={`block hover:${
-                  clickedId === item.id //
-                    ? 'bg-gray-400'
-                    : 'bg-gray-50'
-                } ${clickedId === item.id ? 'bg-gray-300' : ''}`}
               >
                 <div className="p-3 cursor-pointer">
                   <span>{item.emoji}</span>

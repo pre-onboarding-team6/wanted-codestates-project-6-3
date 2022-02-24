@@ -3,8 +3,6 @@ export default function Toggle({ enabled, setEnabled, onEnabled, onDisabled }) {
     <label className="flex items-center h-5">
       <input
         type="checkbox"
-        checked={enabled}
-        value={''}
         onChange={() => {
           setEnabled(!enabled);
         }}

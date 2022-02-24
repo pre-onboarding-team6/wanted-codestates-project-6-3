@@ -8,6 +8,7 @@ import Selector from './components/Selector';
 import Setting from './components/Setting';
 import { emojiMenus } from './constances';
 import { useState } from 'react';
+import MoveItems from './utils/MoveItems';
 
 const items = emojiMenus;
 
@@ -21,14 +22,23 @@ function App() {
   const [rightItems, setRightItems] = useState([]);
   const [selectedItems, setSelectedItems] = useState(initialSeleted);
 
+  const { handleLeftSelect, handleRightSelect, moveToRight, moveToLeft } =
+    MoveItems({
+      initialSeleted,
+      leftItems,
+      rightItems,
+      setLeftItems,
+      setRightItems,
+      selectedItems,
+      setSelectedItems,
+    });
+
   return (
     <div className="flex items-center p-6 space-x-3">
       <Selector
         list={leftItems}
-        setLeftItems={setLeftItems}
-        setRightItems={setRightItems}
-        selectedItems={selectedItems}
-        handleSelect={setSelectedItems}
+        selectedItems={selectedItems.left}
+        handleSelect={handleLeftSelect}
       />
       <div className="flex flex-col">
         <Button>
@@ -40,19 +50,17 @@ function App() {
         <Button>
           <ChevronDoubleRight />
         </Button>
-        <Button onClick={() => {}}>
+        <Button onClick={moveToLeft}>
           <ChevronLeft />
         </Button>
-        <Button onClick={() => {}}>
+        <Button onClick={moveToRight}>
           <ChevronRight />
         </Button>
       </div>
       <Selector
         list={rightItems}
-        setLeftItems={setLeftItems}
-        setRightItems={setRightItems}
-        selectedItems={selectedItems}
-        handleSelect={setSelectedItems}
+        selectedItems={selectedItems.right}
+        handleSelect={handleRightSelect}
       />
       <Setting />
     </div>

@@ -9,13 +9,9 @@ export default function Selector({
   setLeftItems,
   setRightItems,
   selectedItems,
+  setSelectedItems,
   handleSelect,
 }) {
-  const handleClick = (id) => {
-    console.log(id);
-    selectedItems(id);
-  };
-
   return (
     <div className="flex flex-col space-y-2">
       <Input placeholder={'search'} />
@@ -37,7 +33,7 @@ export default function Selector({
               <ListItem
                 key={item.id}
                 id={item.id}
-                onClick={() => handleClick(item.id)}
+                onClick={() => handleSelect(item.id)}
               >
                 <div className="p-3 cursor-pointer">
                   <span>{item.emoji}</span>

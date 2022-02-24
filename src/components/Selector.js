@@ -5,11 +5,10 @@ import Title from './Title';
 import { useState } from 'react';
 import useDragAndDrop from '../hooks/useDragAndDrop';
 
-export default function Selector({ list, isDraggable, order }) {
+export default function Selector({ list }) {
   const [items, setItems] = useState(list);
-  const { handleDragStart, onDragEnter, handleDrop } = useDragAndDrop({
-    isDraggable,
-    order,
+
+  const { handleDragStart, onDragEnter, handleMouseLeave } = useDragAndDrop({
     setItems,
     items,
   });
@@ -30,23 +29,24 @@ export default function Selector({ list, isDraggable, order }) {
           </div>
         </Title>
         <StackedList>
-          {items.map((item, index) => {
-            return (
-              <ListItem key={index}>
-                <div
-                  className="p-3 cursor-pointer"
-                  onDragStart={(e) => handleDragStart(e, index)}
-                  onDragOver={(e) => e.preventDefault()}
-                  onDragEnter={(e) => onDragEnter(e, index)}
-                  onDrop={(e) => handleDrop()}
-                  draggable
-                >
-                  <span>{item.emoji}</span>
-                  <span>{item.name}</span>
-                </div>
-              </ListItem>
-            );
-          })}
+          <div onMouseLeave={handleMouseLeave}>
+            {items.map((item, index) => {
+              return (
+                <ListItem key={index}>
+                  <div
+                    className="p-3 cursor-pointer"
+                    onDragStart={(e) => handleDragStart(e, index)}
+                    onDragOver={(e) => e.preventDefault()}
+                    onDragEnter={(e) => onDragEnter(e, index)}
+                    draggable
+                  >
+                    <span>{item.emoji}</span>
+                    <span>{item.name}</span>
+                  </div>
+                </ListItem>
+              );
+            })}
+          </div>
         </StackedList>
         <div className="flex justify-center p-2 border-t">
           <span>0/4</span>

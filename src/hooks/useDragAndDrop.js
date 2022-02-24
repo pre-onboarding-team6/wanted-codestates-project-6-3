@@ -1,16 +1,21 @@
-import { useRef } from 'react';
+import { useEffect, useRef } from 'react';
 
-const useDragAndDrop = ({ isDraggable, order, setItems, items }) => {
+const useDragAndDrop = ({ setItems, items }) => {
+  const startContainer = useRef();
   const draggingItem = useRef();
   const dragOverItem = useRef();
 
+  useEffect(() => {
+    startContainer.current = false;
+  }, []);
+
   const handleDragStart = (e, position) => {
     draggingItem.current = position;
-    isDraggable[order] = false;
+    startContainer.current = true;
   };
 
   const onDragEnter = (e, position) => {
-    if (!(order === '1' ? isDraggable[0] : isDraggable[1])) {
+    if (!startContainer.current) {
       return;
     } else {
       handleDragEnter(e, position);
@@ -30,14 +35,14 @@ const useDragAndDrop = ({ isDraggable, order, setItems, items }) => {
     setItems(itemsCopy);
   };
 
-  const handleDrop = () => {
-    isDraggable[order] = true;
+  const handleMouseLeave = () => {
+    startContainer.current = false;
   };
 
   return {
+    handleMouseLeave,
     handleDragStart,
     onDragEnter,
-    handleDrop,
   };
 };
 

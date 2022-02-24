@@ -21,7 +21,7 @@ export default function Setting() {
   }, [size]);
 
   return (
-    <div className="p-6">
+    <div>
       <Dropdown
         button={
           <Button>

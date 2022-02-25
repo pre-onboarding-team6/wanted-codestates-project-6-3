@@ -78,13 +78,11 @@ export default function Selector({
             })}
           </div>
         </StackedList>
-        {showSelected && (
-          <div className="flex justify-center p-2 border-t">
-            <span>
-              {selectedItems.length} / {list.length}
-            </span>
-          </div>
-        )}
+        <div className="flex justify-center p-2 border-t">
+          <span className={showSelected ? 'text-black' : 'text-gray-100'}>
+            {selectedItems.length} / {list.length}
+          </span>
+        </div>
       </div>
     </div>
   );

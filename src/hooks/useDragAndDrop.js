@@ -24,7 +24,6 @@ const useDragAndDrop = ({ setItems, items }) => {
 
   const handleDragEnter = (e, position) => {
     dragOverItem.current = position;
-
     const itemsCopy = [...items];
     const draggingItemContent = itemsCopy[dragOverItem.current];
     itemsCopy.splice(dragOverItem.current, 1);

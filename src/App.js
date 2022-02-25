@@ -43,6 +43,7 @@ function App() {
         list={leftItems}
         selectedItems={selectedItems.left}
         handleSelect={handleLeftSelect}
+        setList={setLeftItems}
       />
       <div className="flex flex-col self-center">
         <Button>
@@ -65,6 +66,7 @@ function App() {
         list={rightItems}
         selectedItems={selectedItems.right}
         handleSelect={handleRightSelect}
+        setList={setRightItems}
       />
       <Setting />
     </div>

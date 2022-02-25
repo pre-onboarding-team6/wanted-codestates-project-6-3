@@ -5,12 +5,17 @@ import Title from './Title';
 import { useState } from 'react';
 import useDragAndDrop from '../hooks/useDragAndDrop';
 
-export default function Selector({ list, selectedItems, handleSelect }) {
-  const [items, setItems] = useState(list);
+export default function Selector({
+  list,
+  selectedItems,
+  handleSelect,
+  setList,
+}) {
+  // const [items, setItems] = useState(list);
 
   const { handleDragStart, onDragEnter, handleMouseLeave } = useDragAndDrop({
-    setItems,
-    items,
+    setItems: setList,
+    items: list,
   });
 
   return (

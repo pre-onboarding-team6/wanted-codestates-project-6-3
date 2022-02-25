@@ -1,6 +1,7 @@
-export default function ChevronRight({ className = "h-5 w-5" }) {
+export default function ChevronRight({ className = 'h-5 w-5', ...rest }) {
   return (
     <svg
+      {...rest}
       xmlns="http://www.w3.org/2000/svg"
       className={className}
       fill="none"

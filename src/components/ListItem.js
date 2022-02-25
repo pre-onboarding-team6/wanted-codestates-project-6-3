@@ -1,3 +1,11 @@
-export default function ListItem({ children }) {
-  return <div className="block hover:bg-gray-50">{children}</div>;
+export default function ListItem({
+  className = 'block select-none hover:bg-gray-100',
+  children,
+  ...rest
+}) {
+  return (
+    <div className={className} {...rest}>
+      {children}
+    </div>
+  );
 }

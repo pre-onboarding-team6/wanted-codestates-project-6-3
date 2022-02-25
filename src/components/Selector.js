@@ -75,7 +75,7 @@ export default function Selector({
                   onDragEnter={(e) => onDragEnter(e, index)}
                   draggable
                   onClick={(e) => handleSelect(e, item.id)}
-                  className={`block group-hover:bg-white hover:bg-gray-100 select-none${
+                  className={`block group-hover:bg-white hover:bg-gray-100 select-none ${
                     selectedItems.map(({ id }) => id).includes(item.id)
                       ? 'bg-gray-100'
                       : 'bg-white'

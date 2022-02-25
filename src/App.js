@@ -16,7 +16,6 @@ const initialSeleted = {
   left: [],
   right: [],
 };
-
 function App() {
   const [leftItems, setLeftItems] = useState(items);
   const [rightItems, setRightItems] = useState([]);
@@ -38,13 +37,13 @@ function App() {
     selectedItems,
     setSelectedItems,
   });
-
   return (
     <div className="flex p-6 space-x-3">
       <Selector
         list={leftItems}
         selectedItems={selectedItems.left}
         handleSelect={handleLeftSelect}
+        setList={setLeftItems}
       />
       <div className="flex flex-col self-center">
         <Button>
@@ -67,6 +66,7 @@ function App() {
         list={rightItems}
         selectedItems={selectedItems.right}
         handleSelect={handleRightSelect}
+        setList={setRightItems}
       />
       <Setting />
     </div>

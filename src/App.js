@@ -46,6 +46,7 @@ function App() {
     setRightItems,
     selectedItems,
     setSelectedItems,
+    moveOnlyOne,
   });
 
   const onChangeListSize = (data, type) => {
@@ -77,7 +78,6 @@ function App() {
         searchDisabled={searchDisabled}
         itemSize={itemSize}
         showSelected={showSelected}
-        moveOnlyOne={moveOnlyOne}
       />
       <div className="flex flex-col self-center space-y-1">
         <Button onClick={resetMove}>
@@ -107,7 +107,6 @@ function App() {
         searchDisabled={searchDisabled}
         itemSize={itemSize}
         showSelected={showSelected}
-        moveOnlyOne={moveOnlyOne}
       />
       <Setting
         changeListSize={onChangeListSize}

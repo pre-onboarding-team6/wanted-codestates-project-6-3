@@ -7,6 +7,7 @@ const moveItems = ({
   setSelectedItems,
   leftItems,
   rightItems,
+  moveOnlyOne,
 }) => {
   // shift 클릭
   // 선택된 아이템들, 왼쪽/오른쪽 아이템들, 지금 클릭된 id받아서 범위 내의 아이템들 반환
@@ -35,7 +36,9 @@ const moveItems = ({
   };
 
   const handleLeftSelect = (e, id) => {
-    if (e.shiftKey) {
+    console.log(moveOnlyOne);
+    // 하나씩만 옮기기 이면 다중 선택 못하도록
+    if (e.shiftKey && !moveOnlyOne) {
       // shift 다중 선택
       const selects = shiftClick(selectedItems.left, leftItems, id);
 
@@ -50,7 +53,7 @@ const moveItems = ({
       setSelectedItems((prev) => ({
         left: prev.left.map(({ id }) => id).includes(id) // 이미 있던 아이템이라면
           ? prev.left.filter(({ id: itemId }) => itemId !== id) // selected에서 삭제
-          : e.ctrlKey || e.metaKey
+          : (e.ctrlKey || e.metaKey) && !moveOnlyOne
           ? [
               ...prev.left,
               ...leftItems.filter(({ id: itemId }) => itemId === id), // ctrl/cmd 키 누른거면 축적
@@ -62,7 +65,7 @@ const moveItems = ({
   };
 
   const handleRightSelect = (e, id) => {
-    if (e.shiftKey) {
+    if (e.shiftKey && !moveOnlyOne) {
       // shift 다중 선택
       const selects = shiftClick(selectedItems.right, rightItems, id);
 
@@ -78,7 +81,7 @@ const moveItems = ({
         left: [],
         right: prev.right.map(({ id }) => id).includes(id)
           ? prev.right.filter(({ id: itemId }) => itemId !== id)
-          : e.ctrlKey || e.metaKey
+          : (e.ctrlKey || e.metaKey) && !moveOnlyOne
           ? [
               ...prev.right,
               ...rightItems.filter(({ id: itemId }) => itemId === id),

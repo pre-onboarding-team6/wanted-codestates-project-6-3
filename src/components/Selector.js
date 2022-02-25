@@ -2,7 +2,7 @@ import Input from './Input';
 import ListItem from './ListItem';
 import StackedList from './StackedList';
 import Title from './Title';
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import useDragAndDrop from '../hooks/useDragAndDrop';
 
 export default function Selector({
@@ -19,6 +19,7 @@ export default function Selector({
   rightTitle,
   moveOnlyOne,
 }) {
+  const dragContainer = useRef();
   const [keyword, setKeyword] = useState('');
   const onKeyUp = (e) => e.keyCode === 13 && setKeyword(e.target.value);
 
@@ -35,46 +36,57 @@ export default function Selector({
         onKeyUp={onKeyUp}
       />
       <div
-        className="flex flex-col overflow-hidden bg-white shadow sm:rounded-md"
+        className="flex flex-col overflow-hidden bg-white rounded-md shadow"
         style={{
           width: listWidth,
           height: listHeight,
         }}
       >
         <Title>
-          <div className="p-3">
+          <div className="p-3 border-b border-gray-200">
             <span className="text-xl">
               {leftTitle ? leftTitle : rightTitle}
             </span>
           </div>
         </Title>
         <StackedList>
-          <div onMouseLeave={handleMouseLeave}>
+          <div
+            ref={dragContainer}
+            onMouseLeave={handleMouseLeave}
+            className="divide-y divide-gray-200"
+          >
             {list?.map((item, index) => {
               return (
-                item.name.includes(keyword) && (
-                  <ListItem
-                    key={item.id}
-                    id={item.id}
-                    onDragStart={(e) => handleDragStart(e, index)}
-                    onDragOver={(e) => e.preventDefault()}
-                    onDragEnter={(e) => onDragEnter(e, index)}
-                    draggable
-                    onClick={(e) => handleSelect(e, item.id)}
-                    className={`block hover:bg-gray-100 select-none
-                ${
-                  selectedItems.map(({ id }) => id).includes(item.id)
-                    ? 'bg-gray-100'
-                    : 'bg-white'
-                }
+                <ListItem
+                  key={item.id}
+                  id={item.id}
+                  onDragStart={(e) => {
+                    if (dragContainer.current) {
+                      dragContainer.current.classList.add('group');
+                    }
+                    handleDragStart(e, index);
+                  }}
+                  onDragEnd={() => {
+                    if (dragContainer.current) {
+                      dragContainer.current.classList.remove('group');
+                    }
+                  }}
+                  onDragOver={(e) => e.preventDefault()}
+                  onDragEnter={(e) => onDragEnter(e, index)}
+                  draggable
+                  onClick={(e) => handleSelect(e, item.id)}
+                  className={`block group-hover:bg-white hover:bg-gray-100 select-none${
+                    selectedItems.map(({ id }) => id).includes(item.id)
+                      ? 'bg-gray-100'
+                      : 'bg-white'
+                  }
                   `}
-                  >
-                    <div className="p-3 cursor-pointer">
-                      <span style={{ fontSize: itemSize }}>{item.emoji}</span>
-                      <span style={{ fontSize: itemSize }}>{item.name}</span>
-                    </div>
-                  </ListItem>
-                )
+                >
+                  <div className="p-3 cursor-pointer">
+                    <span style={{ fontSize: itemSize }}>{item.emoji}</span>
+                    <span style={{ fontSize: itemSize }}>{item.name}</span>
+                  </div>
+                </ListItem>
               );
             })}
           </div>

@@ -65,7 +65,7 @@ function App() {
   };
 
   return (
-    <div className="flex p-6 space-x-3">
+    <div className="flex justify-center w-full p-6 space-x-3">
       <Selector
         list={leftItems}
         selectedItems={selectedItems.left}
@@ -79,7 +79,7 @@ function App() {
         showSelected={showSelected}
         moveOnlyOne={moveOnlyOne}
       />
-      <div className="flex flex-col self-center">
+      <div className="flex flex-col self-center space-y-1">
         <Button onClick={resetMove}>
           <Refresh />
         </Button>

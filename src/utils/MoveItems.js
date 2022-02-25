@@ -25,8 +25,10 @@ const moveItems = ({
     end = originItems.map(({ id: itemId }) => itemId === id).indexOf(true);
 
     // start 부터 end 까지 선택된 것으로 설정
-    const selects = originItems.filter(
-      (item, index) => index >= start && index <= end,
+    const selects = originItems.filter((item, index) =>
+      start > end
+        ? index >= end && index <= start
+        : index >= start && index <= end,
     );
 
     return selects;

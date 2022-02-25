@@ -74,7 +74,7 @@ function App() {
         setList={setLeftItems}
         listWidth={listWidth}
         listHeight={listHeight}
-        leftTitle={leftTitle}
+        title={leftTitle}
         searchDisabled={searchDisabled}
         itemSize={itemSize}
         showSelected={showSelected}
@@ -103,7 +103,7 @@ function App() {
         setList={setRightItems}
         listHeight={listHeight}
         listWidth={listWidth}
-        rightTitle={rightTitle}
+        title={rightTitle}
         searchDisabled={searchDisabled}
         itemSize={itemSize}
         showSelected={showSelected}
@@ -115,6 +115,10 @@ function App() {
         setItemSize={setItemSize}
         setShowSelected={setShowSelected}
         setMoveOnlyOne={setMoveOnlyOne}
+        leftTitle={leftTitle}
+        rightTitle={rightTitle}
+        listWidth={listWidth}
+        listHeight={listHeight}
       />
     </div>
   );

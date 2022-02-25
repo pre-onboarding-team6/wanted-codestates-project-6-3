@@ -7,7 +7,7 @@ export default function Toggle({ enabled, setEnabled, onEnabled, onDisabled }) {
     } else if (!enabled && onDisabled) {
       onDisabled();
     }
-  }, [enabled]);
+  }, [enabled, onEnabled, onDisabled]);
 
   return (
     <label className="flex items-center h-5">

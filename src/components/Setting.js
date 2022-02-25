@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import Button from './Button';
 import Cog from './icons/Cog';
 import Input from './Input';
@@ -21,20 +21,16 @@ export default function Setting({
   setItemSize,
   setShowSelected,
   setMoveOnlyOne,
+  leftTitle,
+  rightTitle,
+  listWidth,
+  listHeight,
 }) {
   const [enabledTitle, setEnabledTitle] = useState(false);
   const [enabledSearch, setEnabledSearch] = useState(false);
   const [enabledMove, setEnabledMove] = useState(false);
   const [enabledUnit, setEnabledUnit] = useState(false);
-
   const [isChangeTitle, setIsChangeTitle] = useState(false);
-
-  const [leftTitle, setLeftTitle] = useState('available options');
-  const [rightTitle, setRightTitle] = useState('selected options');
-
-  const [width, setWidth] = useState(300);
-  const [height, setHeight] = useState(400);
-
   const [sizeType, setSizeType] = useState(sizeList[0].type);
 
   const onChangeListSize = (e, type) => {
@@ -42,10 +38,8 @@ export default function Setting({
       let result = parseInt(e.target.value);
       if (type === 'width') {
         changeListSize(result, 'width');
-        setWidth(result);
       } else {
         changeListSize(result, 'height');
-        setHeight(result);
       }
     } else {
       alert('숫자를 입력해주세요');
@@ -83,10 +77,8 @@ export default function Setting({
             <div className="flex flex-col p-3 space-y-1">
               <div>
                 <Input
-                  // value={leftTitle}
                   defaultValue={leftTitle}
-                  placeholder={`${leftTitle}`}
-                  // onChange={(e) => setLeftTitle(e.target.value)}
+                  placeholder="타이틀을 입력하세요."
                   onKeyUp={(e) =>
                     e.keyCode === 13 && changeTitle(e.target.value, 'avail')
                   }
@@ -95,9 +87,8 @@ export default function Setting({
               </div>
               <div>
                 <Input
-                  value={rightTitle}
-                  placeholder={`${rightTitle}`}
-                  onChange={(e) => setRightTitle(e.target.value)}
+                  defaultValue={rightTitle}
+                  placeholder="타이틀을 입력하세요."
                   onKeyUp={(e) =>
                     e.keyCode === 13 && changeTitle(e.target.value, 'selected')
                   }
@@ -180,7 +171,7 @@ export default function Setting({
             <div className="flex flex-col p-3 space-y-1">
               <div>
                 <Input
-                  placeholder={`가로 (현재: ${width}px)`}
+                  placeholder={`가로 (현재: ${listWidth}px)`}
                   onKeyUp={(e) =>
                     e.keyCode === 13 && onChangeListSize(e, 'width')
                   }
@@ -188,7 +179,7 @@ export default function Setting({
               </div>
               <div>
                 <Input
-                  placeholder={`세로 (현재: ${height}px)`}
+                  placeholder={`세로 (현재: ${listHeight}px)`}
                   onKeyUp={(e) =>
                     e.keyCode === 13 && onChangeListSize(e, 'height')
                   }

@@ -36,7 +36,6 @@ const moveItems = ({
   };
 
   const handleLeftSelect = (e, id) => {
-    console.log(moveOnlyOne);
     // 하나씩만 옮기기 이면 다중 선택 못하도록
     if (e.shiftKey && !moveOnlyOne) {
       // shift 다중 선택

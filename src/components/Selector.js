@@ -12,12 +12,10 @@ export default function Selector({
   setList,
   listWidth,
   listHeight,
-  leftTitle,
   searchDisabled,
   itemSize,
   showSelected,
-  rightTitle,
-  moveOnlyOne,
+  title,
 }) {
   const dragContainer = useRef();
   const [keyword, setKeyword] = useState('');
@@ -44,9 +42,7 @@ export default function Selector({
       >
         <Title>
           <div className="p-3 border-b border-gray-200">
-            <span className="text-xl">
-              {leftTitle ? leftTitle : rightTitle}
-            </span>
+            <span className="text-xl">{title}</span>
           </div>
         </Title>
         <StackedList>
@@ -62,7 +58,6 @@ export default function Selector({
                     key={item.id}
                     id={item.id}
                     onDragStart={(e) => {
-                      console.log('start');
                       if (dragContainer.current) {
                         dragContainer.current.classList.add('group');
                       }

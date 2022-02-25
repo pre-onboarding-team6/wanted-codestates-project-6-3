@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 import Input from './Input';
 import ListItem from './ListItem';
@@ -9,7 +9,6 @@ import { emojiMenus } from '../constances';
 
 export default function Selector(props) {
   const [keyword, setKeyword] = useState('');
-
   const onKeyUp = (e) => e.keyCode === 13 && setKeyword(e.target.value);
 
   return (

@@ -69,6 +69,7 @@ function App() {
           setSearchDisabled={setSearchDisabled}
           setItemSize={setItemSize}
           setShowSelected={setShowSelected}
+          setMoveOnlyOne={setMoveOnlyOne}
         />
       </div>
     </div>

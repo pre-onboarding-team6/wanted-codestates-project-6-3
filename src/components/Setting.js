@@ -7,7 +7,6 @@ import Popover from './Popover';
 import Radio from './Radio';
 import StackedList from './StackedList';
 import Toggle from './Toggle';
-import Status from '../status';
 
 const sizeList = [
   { type: 'xs', value: 15 },
@@ -21,6 +20,7 @@ export default function Setting({
   setSearchDisabled,
   setItemSize,
   setShowSelected,
+  setMoveOnlyOne,
 }) {
   const [enabledTitle, setEnabledTitle] = useState(false);
   const [enabledSearch, setEnabledSearch] = useState(false);

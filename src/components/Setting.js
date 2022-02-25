@@ -127,7 +127,16 @@ export default function Setting({
             <div className="flex items-center justify-between p-3">
               <span className="text-lg">하나씩만 옮기기</span>
               <span>
-                <Toggle enabled={enabledMove} setEnabled={setEnabledMove} />
+                <Toggle
+                  enabled={enabledMove}
+                  setEnabled={setEnabledMove}
+                  onEnabled={() => {
+                    setMoveOnlyOne(false);
+                  }}
+                  onDisabled={() => {
+                    setMoveOnlyOne(true);
+                  }}
+                />
               </span>
             </div>
           </ListItem>

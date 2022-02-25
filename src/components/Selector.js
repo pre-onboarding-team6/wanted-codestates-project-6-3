@@ -51,27 +51,29 @@ export default function Selector({
           <div onMouseLeave={handleMouseLeave}>
             {list?.map((item, index) => {
               return (
-                <ListItem
-                  key={item.id}
-                  id={item.id}
-                  onDragStart={(e) => handleDragStart(e, index)}
-                  onDragOver={(e) => e.preventDefault()}
-                  onDragEnter={(e) => onDragEnter(e, index)}
-                  draggable
-                  onClick={(e) => handleSelect(e, item.id)}
-                  className={`block hover:bg-gray-100 select-none
+                item.name.includes(keyword) && (
+                  <ListItem
+                    key={item.id}
+                    id={item.id}
+                    onDragStart={(e) => handleDragStart(e, index)}
+                    onDragOver={(e) => e.preventDefault()}
+                    onDragEnter={(e) => onDragEnter(e, index)}
+                    draggable
+                    onClick={(e) => handleSelect(e, item.id)}
+                    className={`block hover:bg-gray-100 select-none
                 ${
                   selectedItems.map(({ id }) => id).includes(item.id)
                     ? 'bg-gray-100'
                     : 'bg-white'
                 }
                   `}
-                >
-                  <div className="p-3 cursor-pointer">
-                    <span style={{ fontSize: itemSize }}>{item.emoji}</span>
-                    <span style={{ fontSize: itemSize }}>{item.name}</span>
-                  </div>
-                </ListItem>
+                  >
+                    <div className="p-3 cursor-pointer">
+                      <span style={{ fontSize: itemSize }}>{item.emoji}</span>
+                      <span style={{ fontSize: itemSize }}>{item.name}</span>
+                    </div>
+                  </ListItem>
+                )
               );
             })}
           </div>

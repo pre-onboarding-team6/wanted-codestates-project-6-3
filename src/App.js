@@ -77,6 +77,7 @@ function App() {
         searchDisabled={searchDisabled}
         itemSize={itemSize}
         showSelected={showSelected}
+        moveOnlyOne={moveOnlyOne}
       />
       <div className="flex flex-col self-center">
         <Button onClick={resetMove}>
@@ -106,6 +107,7 @@ function App() {
         searchDisabled={searchDisabled}
         itemSize={itemSize}
         showSelected={showSelected}
+        moveOnlyOne={moveOnlyOne}
       />
       <Setting
         changeListSize={onChangeListSize}

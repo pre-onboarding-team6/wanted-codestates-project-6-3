@@ -131,10 +131,10 @@ export default function Setting({
                   enabled={enabledMove}
                   setEnabled={setEnabledMove}
                   onEnabled={() => {
-                    setMoveOnlyOne(false);
+                    setMoveOnlyOne(true);
                   }}
                   onDisabled={() => {
-                    setMoveOnlyOne(true);
+                    setMoveOnlyOne(false);
                   }}
                 />
               </span>

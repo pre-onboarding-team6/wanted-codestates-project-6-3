@@ -17,6 +17,7 @@ export default function Selector({
   itemSize,
   showSelected,
   rightTitle,
+  moveOnlyOne,
 }) {
   const [keyword, setKeyword] = useState('');
   const onKeyUp = (e) => e.keyCode === 13 && setKeyword(e.target.value);

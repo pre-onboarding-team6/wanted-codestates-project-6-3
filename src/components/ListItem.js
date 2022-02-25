@@ -1,5 +1,5 @@
 export default function ListItem({
-  className = 'block hover:bg-gray-50',
+  className = 'block select-none hover:bg-gray-100',
   children,
   ...rest
 }) {

@@ -25,9 +25,12 @@ const useDragAndDrop = ({ setItems, items }) => {
   const handleDragEnter = (e, position) => {
     dragOverItem.current = position;
     const itemsCopy = [...items];
-    const draggingItemContent = itemsCopy[dragOverItem.current];
+    const dragOverItemContent = itemsCopy[dragOverItem.current];
+    const draggingItemContent = itemsCopy[draggingItem.current];
+    draggingItemContent.color = true;
+
     itemsCopy.splice(dragOverItem.current, 1);
-    itemsCopy.splice(draggingItem.current, 0, draggingItemContent);
+    itemsCopy.splice(draggingItem.current, 0, dragOverItemContent);
     draggingItem.current = dragOverItem.current;
     dragOverItem.current = null;
 
@@ -38,10 +41,18 @@ const useDragAndDrop = ({ setItems, items }) => {
     startContainer.current = false;
   };
 
+  const handleDrop = () => {
+    const itemsCopy = [...items];
+    const draggingItemContent = itemsCopy[draggingItem.current];
+    draggingItemContent.color = false;
+    setItems(itemsCopy);
+  };
+
   return {
     handleMouseLeave,
     handleDragStart,
     onDragEnter,
+    handleDrop,
   };
 };
 

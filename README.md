@@ -83,7 +83,8 @@
 - 아이템 크기 조절
 - 영역 크기 조절
 
-![소메뉴기능](https://user-images.githubusercontent.com/81206124/155655056-5fc8a74b-8262-49b9-887f-81f30b8d318b.gif)
+![소메뉴](https://user-images.githubusercontent.com/81206124/155668893-d30051e4-8bcb-4c3f-bbbf-c7deff2d0eae.gif)
+
 
 <br>
 

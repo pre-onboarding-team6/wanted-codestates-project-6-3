@@ -57,7 +57,7 @@ export default function Selector({
           >
             {list?.map((item, index) => {
               return (
-                list.name.includes(keyword) && (
+                item.name.includes(keyword) && (
                   <ListItem
                     key={item.id}
                     id={item.id}

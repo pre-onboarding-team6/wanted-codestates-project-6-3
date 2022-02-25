@@ -1,17 +1,9 @@
-import { useState } from 'react';
 import Input from './Input';
 import ListItem from './ListItem';
 import StackedList from './StackedList';
 import Title from './Title';
 
-export default function Selector({ list, handleSelect }) {
-  const [clickedId, setClickedId] = useState(null);
-
-  const handleClick = (id) => {
-    setClickedId((prev) => (prev === id ? null : id));
-    handleSelect(id);
-  };
-
+export default function Selector({ list, selectedItems, handleSelect }) {
   return (
     <div className="flex flex-col space-y-2">
       <Input placeholder={'search'} />
@@ -33,12 +25,14 @@ export default function Selector({ list, handleSelect }) {
               <ListItem
                 key={item.id}
                 id={item.id}
-                onClick={() => handleClick(item.id)}
-                className={`block hover:${
-                  clickedId === item.id //
-                    ? 'bg-gray-400'
-                    : 'bg-gray-50'
-                } ${clickedId === item.id ? 'bg-gray-300' : ''}`}
+                onClick={(e) => handleSelect(e, item.id)}
+                className={`block hover:bg-gray-100 select-none
+                ${
+                  selectedItems.map(({ id }) => id).includes(item.id)
+                    ? 'bg-gray-100'
+                    : 'bg-white'
+                }
+                `}
               >
                 <div className="p-3 cursor-pointer">
                   <span>{item.emoji}</span>
@@ -49,7 +43,9 @@ export default function Selector({ list, handleSelect }) {
           })}
         </StackedList>
         <div className="flex justify-center p-2 border-t">
-          <span>0/4</span>
+          <span>
+            {selectedItems.length} / {list.length}
+          </span>
         </div>
       </div>
     </div>

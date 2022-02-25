@@ -1,5 +1,5 @@
 export default function StackedList({
-  className = 'bg-white shadow overflow-y-auto sm:rounded-md flex-1',
+  className = 'flex-1 overflow-y-auto bg-white rounded-md shadow',
   children,
   ...rest
 }) {

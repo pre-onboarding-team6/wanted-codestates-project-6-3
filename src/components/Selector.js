@@ -10,8 +10,16 @@ export default function Selector({
   selectedItems,
   handleSelect,
   setList,
+  listWidth,
+  listHeight,
+  leftTitle,
+  searchDisabled,
+  itemSize,
+  showSelected,
+  rightTitle,
 }) {
-  // const [items, setItems] = useState(list);
+  const [keyword, setKeyword] = useState('');
+  const onKeyUp = (e) => e.keyCode === 13 && setKeyword(e.target.value);
 
   const { handleDragStart, onDragEnter, handleMouseLeave } = useDragAndDrop({
     setItems: setList,
@@ -20,17 +28,23 @@ export default function Selector({
 
   return (
     <div className="flex flex-col space-y-2">
-      <Input placeholder={'search'} />
+      <Input
+        placeholder={'search'}
+        disabled={searchDisabled}
+        onKeyUp={onKeyUp}
+      />
       <div
         className="flex flex-col overflow-hidden bg-white shadow sm:rounded-md"
         style={{
-          width: '300px',
-          height: '400px',
+          width: listWidth,
+          height: listHeight,
         }}
       >
         <Title>
           <div className="p-3">
-            <span className="text-xl">Title</span>
+            <span className="text-xl">
+              {leftTitle ? leftTitle : rightTitle}
+            </span>
           </div>
         </Title>
         <StackedList>
@@ -54,19 +68,21 @@ export default function Selector({
                   `}
                 >
                   <div className="p-3 cursor-pointer">
-                    <span>{item.emoji}</span>
-                    <span>{item.name}</span>
+                    <span style={{ fontSize: itemSize }}>{item.emoji}</span>
+                    <span style={{ fontSize: itemSize }}>{item.name}</span>
                   </div>
                 </ListItem>
               );
             })}
           </div>
         </StackedList>
-        <div className="flex justify-center p-2 border-t">
-          <span>
-            {selectedItems.length} / {list.length}
-          </span>
-        </div>
+        {showSelected && (
+          <div className="flex justify-center p-2 border-t">
+            <span>
+              {selectedItems.length} / {list.length}
+            </span>
+          </div>
+        )}
       </div>
     </div>
   );

@@ -8,17 +8,49 @@ import Radio from './Radio';
 import StackedList from './StackedList';
 import Toggle from './Toggle';
 
-export default function Setting() {
-  const [enabledTitle, setEnabledTitle] = useState();
-  const [enabledSearch, setEnabledSearch] = useState();
-  const [enabledMove, setEnabledMove] = useState();
-  const [enabledUnit, setEnabledUnit] = useState();
+const sizeList = [
+  { type: 'xs', value: 15 },
+  { type: 's', value: 20 },
+  { type: 'm', value: 30 },
+];
 
-  const sizeType = ['xs', 's', 'm'];
-  const [size, setSize] = useState('xs');
-  useEffect(() => {
-    console.log('size 변경 => ', size);
-  }, [size]);
+export default function Setting({
+  changeListSize,
+  changeTitle,
+  setSearchDisabled,
+  setItemSize,
+  setShowSelected,
+  setMoveOnlyOne,
+}) {
+  const [enabledTitle, setEnabledTitle] = useState(false);
+  const [enabledSearch, setEnabledSearch] = useState(false);
+  const [enabledMove, setEnabledMove] = useState(false);
+  const [enabledUnit, setEnabledUnit] = useState(false);
+
+  const [isChangeTitle, setIsChangeTitle] = useState(false);
+
+  const [leftTitle, setLeftTitle] = useState('available options');
+  const [rightTitle, setRightTitle] = useState('selected options');
+
+  const [width, setWidth] = useState(300);
+  const [height, setHeight] = useState(400);
+
+  const [sizeType, setSizeType] = useState(sizeList[0].type);
+
+  const onChangeListSize = (e, type) => {
+    if (e.target.value >= '0' && e.target.value <= '9') {
+      let result = parseInt(e.target.value);
+      if (type === 'width') {
+        changeListSize(result, 'width');
+        setWidth(result);
+      } else {
+        changeListSize(result, 'height');
+        setHeight(result);
+      }
+    } else {
+      alert('숫자를 입력해주세요');
+    }
+  };
 
   return (
     <div>
@@ -38,27 +70,39 @@ export default function Setting() {
                   enabled={enabledTitle}
                   setEnabled={setEnabledTitle}
                   onEnabled={() => {
-                    console.log('title 수정가능');
+                    setIsChangeTitle(true);
                   }}
                   onDisabled={() => {
-                    console.log('title 수정불가');
+                    setIsChangeTitle(false);
                   }}
                 />
               </span>
             </div>
           </ListItem>
           <ListItem>
-            <div className="p-3 flex flex-col space-y-1">
+            <div className="flex flex-col p-3 space-y-1">
               <div>
                 <Input
-                  placeholder={'avaliable options'}
-                  onKeyDown={() => {
-                    console.log('sub');
-                  }}
+                  // value={leftTitle}
+                  defaultValue={leftTitle}
+                  placeholder={`${leftTitle}`}
+                  // onChange={(e) => setLeftTitle(e.target.value)}
+                  onKeyUp={(e) =>
+                    e.keyCode === 13 && changeTitle(e.target.value, 'avail')
+                  }
+                  disabled={!isChangeTitle}
                 />
               </div>
               <div>
-                <Input placeholder={'selected options'} />
+                <Input
+                  value={rightTitle}
+                  placeholder={`${rightTitle}`}
+                  onChange={(e) => setRightTitle(e.target.value)}
+                  onKeyUp={(e) =>
+                    e.keyCode === 13 && changeTitle(e.target.value, 'selected')
+                  }
+                  disabled={!isChangeTitle}
+                />
               </div>
             </div>
           </ListItem>
@@ -66,7 +110,16 @@ export default function Setting() {
             <div className="flex items-center justify-between p-3">
               <span className="text-lg">검색</span>
               <span>
-                <Toggle enabled={enabledSearch} setEnabled={setEnabledSearch} />
+                <Toggle
+                  enabled={enabledSearch}
+                  setEnabled={setEnabledSearch}
+                  onEnabled={() => {
+                    setSearchDisabled(false);
+                  }}
+                  onDisabled={() => {
+                    setSearchDisabled(true);
+                  }}
+                />
               </span>
             </div>
           </ListItem>
@@ -82,22 +135,32 @@ export default function Setting() {
             <div className="flex items-center justify-between p-3">
               <span className="text-lg">선택된 아이템 갯수 표시</span>
               <span>
-                <Toggle enabled={enabledUnit} setEnabled={setEnabledUnit} />
+                <Toggle
+                  enabled={enabledUnit}
+                  setEnabled={setEnabledUnit}
+                  onEnabled={() => {
+                    setShowSelected(true);
+                  }}
+                  onDisabled={() => {
+                    setShowSelected(false);
+                  }}
+                />
               </span>
             </div>
           </ListItem>
           <ListItem>
-            <div className="p-3 flex items-center justify-between">
+            <div className="flex items-center justify-between p-3">
               <span className="text-lg">아이템 크기</span>
               <div className="flex items-center space-x-4">
-                {sizeType.map((type, index) => (
+                {sizeList.map((item, index) => (
                   <Radio
                     key={index}
                     name="size"
-                    value={size}
-                    label={type}
+                    value={sizeType}
+                    label={item.type}
                     onChange={() => {
-                      setSize(type);
+                      setSizeType(item.type);
+                      setItemSize(item.value);
                     }}
                   />
                 ))}
@@ -105,12 +168,22 @@ export default function Setting() {
             </div>
           </ListItem>
           <ListItem>
-            <div className="p-3 flex flex-col space-y-1">
+            <div className="flex flex-col p-3 space-y-1">
               <div>
-                <Input placeholder={`가로 (현재: 171px)`} />
+                <Input
+                  placeholder={`가로 (현재: ${width}px)`}
+                  onKeyUp={(e) =>
+                    e.keyCode === 13 && onChangeListSize(e, 'width')
+                  }
+                />
               </div>
               <div>
-                <Input placeholder={`세로 (현재: 300px)`} />
+                <Input
+                  placeholder={`세로 (현재: ${height}px)`}
+                  onKeyUp={(e) =>
+                    e.keyCode === 13 && onChangeListSize(e, 'height')
+                  }
+                />
               </div>
             </div>
           </ListItem>

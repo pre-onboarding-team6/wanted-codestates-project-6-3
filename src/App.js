@@ -8,7 +8,7 @@ import Selector from './components/Selector';
 import Setting from './components/Setting';
 import { emojiMenus } from './constances';
 import { useState } from 'react';
-import moveItems from './utils/moveItems_temp';
+import moveItems from './utils/moveItems';
 
 const items = emojiMenus;
 
